@@ -403,7 +403,7 @@ def render_sidebar():
 
         # ---------- Drivers
         a = st.session_state.assumptions
-        with st.expander("Operations", expanded=True):
+        with st.expander("[ Operations ]", expanded=True):
             a["cob2_util_steady"] = st.slider(
                 "COB-2 Utilisation (steady)", 0.20, 1.00,
                 float(a["cob2_util_steady"]), 0.01, format="%.2f",
@@ -421,7 +421,7 @@ def render_sidebar():
                 float(a["capex_intensity"]), 0.005, format="%.3f",
             )
 
-        with st.expander("Financing", expanded=False):
+        with st.expander("[ Financing ]", expanded=False):
             a["interest_rate"] = st.slider(
                 "Interest Rate (%)", 0.04, 0.20,
                 float(a["interest_rate"]), 0.005, format="%.3f",
@@ -431,7 +431,7 @@ def render_sidebar():
                 float(a["target_de"]), 0.05, format="%.2f",
             )
 
-        with st.expander("Cost of Capital", expanded=False):
+        with st.expander("[ Cost of Capital ]", expanded=False):
             a["unlevered_beta"] = st.slider(
                 "Unlevered Beta", 0.40, 2.00,
                 float(a["unlevered_beta"]), 0.05, format="%.2f",
@@ -1178,18 +1178,18 @@ def tab_smart_analyst(results: Dict, all_scen: Dict[str, Dict]):
 
     # ---------- Render history
     for entry in st.session_state.analyst_history:
-        with st.chat_message("user", avatar=">"):
+        with st.chat_message("user"):
             st.markdown(entry["q"])
-        with st.chat_message("assistant", avatar="*"):
+        with st.chat_message("assistant"):
             st.markdown(entry["a"])
 
     # ---------- Input
     typed = st.chat_input("Ask about WACC, margins, covenants, scenarios...")
     user_query = pending_query or typed
     if user_query:
-        with st.chat_message("user", avatar=">"):
+        with st.chat_message("user"):
             st.markdown(user_query)
-        with st.chat_message("assistant", avatar="*"):
+        with st.chat_message("assistant"):
             with st.spinner("Thinking..."):
                 response = analyst.answer(user_query)
             st.markdown(response)
